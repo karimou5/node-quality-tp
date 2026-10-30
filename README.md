@@ -35,6 +35,10 @@ export SONAR_TOKEN="<votre_token>"
 docker run --rm -e SONAR_HOST_URL -e SONAR_TOKEN -v "$PWD":/usr/src sonarsource/sonar-scanner-cli
 ```
 
+Sous Linux, `localhost` désigne le conteneur du scanner : ajoutez `--network host --user "$(id -u):$(id -g)"`.
+
+Si le port 9000 est déjà pris, lancez SonarQube sur un autre port : `SONAR_PORT=9001 docker compose -f docs/sonar-docker-compose.yml up -d`, puis adaptez `SONAR_HOST_URL`.
+
 ## CI GitLab
 
 - Ajoutez dans **Settings → CI/CD → Variables** : `SONAR_HOST_URL`, `SONAR_TOKEN`
