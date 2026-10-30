@@ -3,3 +3,4 @@ coverage/
 .scannerwork/
 .npm/
 .env
+.sonar-cache/
