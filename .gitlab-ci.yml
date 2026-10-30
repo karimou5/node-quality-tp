@@ -2,7 +2,7 @@ stages: [install, lint, test, sonar]
 
 variables:
   NODE_ENV: test
-  NPM_CACHE_FOLDER: "$CI_PROJECT_DIR/.npm"
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -22,7 +22,7 @@ install:
 lint:
   image: node:20-alpine
   stage: lint
-  needs: ["install"]
+  needs: ['install']
   script:
     - npm run lint
     - npm run format
@@ -31,7 +31,7 @@ lint:
 test:
   image: node:20-alpine
   stage: test
-  needs: ["install"]
+  needs: ['install']
   script:
     - npm run test:cov
   artifacts:
@@ -43,10 +43,11 @@ test:
 sonar:
   image: sonarsource/sonar-scanner-cli:latest
   stage: sonar
-  needs: ["test"]
+  needs: ['test']
   variables:
     SONAR_HOST_URL: $SONAR_HOST_URL
     SONAR_TOKEN: $SONAR_TOKEN
+    GIT_DEPTH: '0'
   script:
     - sonar-scanner
       -Dsonar.projectKey=node-quality-tp

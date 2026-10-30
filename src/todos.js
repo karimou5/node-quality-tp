@@ -13,6 +13,6 @@ export function createStore() {
       if (idx === -1) return false;
       items.splice(idx, 1);
       return true;
-    }
+    },
   };
 }
